@@ -1,0 +1,36 @@
+{
+  "name": "smart-logistics-api",
+  "version": "1.0.0",
+  "description": "## 📝 Overview",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "dev": "tsx watch --inspect src/index.ts",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edperalta/smart-logistics-api.git"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "express": "^4.21.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "prisma": "5.22.0",
+    "tsx": "^4.21.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edperalta/smart-logistics-api/issues"
+  },
+  "homepage": "https://github.com/edperalta/smart-logistics-api#readme"
+}

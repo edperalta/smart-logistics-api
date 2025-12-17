@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  url = env("DATABASE_URL")
+  provider = "sqlite"
+}
+
+
+
+model Edge {
+  id        String      @id @default(uuid())
+  from  String 
+  to String
+  cost   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  graphs Graph[]
+}
+
+model Graph {
+  id        String      @id @default(uuid())
+  edges Edge[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
