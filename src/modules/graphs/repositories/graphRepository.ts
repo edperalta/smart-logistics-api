@@ -1,6 +1,17 @@
 import { Graph, Prisma, PrismaClient } from '../../../generated/prisma';
 
 const prisma = new PrismaClient()
+
+interface Edge {
+    id: string;
+    from: string;
+    to: string;
+    cost: number;
+}
+export interface GraphInterface {
+    id: string;
+    edges: Edge[];
+}
 export class GraphRepository {
 
     async createGraph(edgeData: {
@@ -11,7 +22,7 @@ export class GraphRepository {
                 create: edgeData.edges ?? []
             },
         });
-        const result: Graph | null = await this.safeExecute(async () => await prisma.graph.create({
+        const result: Graph | null = await this.safeExecution(async () => await prisma.graph.create({
             data: validatedData,
             include: {
                 edges: true
@@ -22,19 +33,19 @@ export class GraphRepository {
 
     }
     async getAllGraphs(): Promise<Graph[] | null> {
-        const resutl = await this.safeExecute(async () => await prisma.graph.findMany())
+        const resutl = await this.safeExecution(async () => await prisma.graph.findMany())
         return resutl;
     }
 
-    async getGraphById(id: string): Promise<Graph | null> {
-        return await this.safeExecute(async () => await prisma.graph.findUnique({
+    async getGraphById(id: string): Promise<GraphInterface | null> {
+        return await this.safeExecution(async () => await prisma.graph.findUnique({
             where: { id },
             include: { edges: true }
         }));
 
     }
 
-    async safeExecute<T>(operation: () => Promise<T>): Promise<T | null> {
+    async safeExecution<T>(operation: () => Promise<T>): Promise<T | null> {
         try {
             return await operation();
         } catch (error) {
